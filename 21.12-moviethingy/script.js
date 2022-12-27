@@ -1,47 +1,106 @@
-const baseUrlMovies = "http://www.omdbapi.com/?i=tt3896198&apikey=206d082e";
-const movieUrl = baseUrlMovies + "http://www.omdbapi.com/?apikey=[206d082e]&";
+// const baseUrlMovies = "http://www.omdbapi.com/?i=tt3896198&apikey=206d082e";
+// const movieUrl = baseUrlMovies + "http://www.omdbapi.com/?apikey=[206d082e]&";
+// const accessKey = "206d082e";
+
+// const baseUrlMovies = "http://www.omdbapi.com/?";
+const movieUrl = "https://www.omdbapi.com/?apikey=206d082e";
 const accessKey = "206d082e";
 
 const baseUrlBin = "https://api.jsonbin.io/v3/b/";
 const ourBinUrl = baseUrlBin + "63a4529fdfc68e59d56e9b8d";
 const masterKeyBin = "$2b$10$re8BCarS2TJ3.fYpy2KSd.d.Gya4h9xv/Kkmio4GmMjsYxCzTFvtu";
 
+console.log('hej')
+const searchTitle = document.querySelector("input[name='title']")
+const searchGenre = document.querySelector("input[name='genre']")
+const newMovieSearch = searchTitle.value
+
+fetch(movieUrl + "&t=" + `${newMovieSearch}*`)
+     .then(
+          function (response) {
+               return response.json();
+          })
+     .then((response) => {
+          let data = response;
+          console.log(data);
+          document.querySelector(".movie__container").innerHTML = data.Poster + "<br><br>" + data.Title + "<br><br>" + data.Genre + "<br><br>" + data.Plot + " 😸" + "<hr>";
+     })
+     .catch(function (err) {
+          console.log('error: ' + err)
+          document.querySelector(".movie__container").innerHTML = "🙀" + "Sorry, cannot fetch at this time - try again later" + "🙀"
+     });
+
+// console.log('enough?: ' + newMovieSearch)
+console.log('we searched for: ' + newMovieSearch)
 const App = {
-     listOfMovies: [], //spara filmer vi laddar in från API
-     listOfFavorites: [], //spara favoriter
+     // listOfMovies: [], //spara filmer vi laddar in från API
+     // listOfFavorites: [], //spara favoriter
      elements: {
           container: document.getElementById("movie-container")
      },
-     fetchMovies(getMovieFact) {
-          function getMovieFact() {
-               fetch("http://www.omdbapi.com/?apikey=[206d082e]&")
-                    .then(
-                         function (response) {
-                              return response.json();
-                         })
-                    .then((response) => {
-                         let data = response;
-                         console.log(data);
-                         document.querySelector(".movie__container").innerHTML = data.Title + "<br><br>" + data.Genre + "<br><br>" + data.Plot + " 😸" + "<hr>";
-                    })
-                    .catch(function (err) {
-                         console.log('error: ' + err)
-                         document.querySelector(".movie__container").innerHTML = "🙀" + "Sorry, cannot fetch at this time - try again later" + "🙀"
-                    });
-          }
+     // fetchMovies() {
+     //      const searchTitle = document.querySelector("input[name='title']")
+     //      const searchGenre = document.querySelector("input[name='genre']")
+     //      const newMovieSearch = createMovieItem(searchTitle.value, searchGenre.value)
 
-     },
-     createFavorite() {
-     },
-     removeFavorite() {
-     },
+     //      console.log('enough?: ' + newMovieSearch)
+     //      console.log('hej')
+     //      fetch(ourTodoUrl, {
+     //           method: "GET",
+     //           headers: {
+     //                "X-Access-Key": accessKey,
+     //           }
+     //      })
+     //           .then(function (response) {
+     //                return response.json()
+     //           })
+     //           .then((response) => {
+     //                let data = response;
+     //                console.log("Data ", data.record)
+     //                this.listOfTodos = []
+     //                data.record.forEach((obj) => {
+     //                     this.listOfTodos.push(obj)
+     //                });
+     //                this.render();
+     //           })
+     //           .catch(function (err) {
+     //                console.log('error: ', err)
+     //           })
 
-     render() {
-     }
+     // },
+     // fetchMovies(){
+
+
+     //      fetch(movieUrl)
+     //           .then(
+     //                function (response) {
+     //                     return response.json();
+     //                })
+     //           .then((response) => {
+     //                let data = response;
+     //                console.log(data);
+     //                document.querySelector(".movie__container").innerHTML = data.Title + "<br><br>" + data.Genre + "<br><br>" + data.Plot + " 😸" + "<hr>";
+     //           })
+     //           .catch(function (err) {
+     //                console.log('error: ' + err)
+     //                document.querySelector(".movie__container").innerHTML = "🙀" + "Sorry, cannot fetch at this time - try again later" + "🙀"
+     //           });
+     // }
+
+     // "http://www.omdbapi.com/?apikey=[206d082e]&"
+     //      createFavorite() {
+     //      },
+     //      removeFavorite() {
+     //      },
+
+     //      render() {
+     //      }
 }
 
-App.render()
-App.getMovieFact()
+
+
+// App.render()
+// App.getMovieFact()
 
 
 // : function () {
@@ -146,3 +205,4 @@ App.getMovieFact()
 
 
 //      });
+
