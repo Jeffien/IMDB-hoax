@@ -3,19 +3,37 @@
 // const accessKey = "206d082e";
 
 // const baseUrlMovies = "http://www.omdbapi.com/?";
-const movieUrl = "https://www.omdbapi.com/?apikey=206d082e";
-const accessKey = "206d082e";
+// const accessKey = "206d082e";
+// const movieBaseUrl = "https://www.omdbapi.com/"
+// const movieUrl = `${movieBaseUrl}?apikey=${accessKey}`;
 
-const baseUrlBin = "https://api.jsonbin.io/v3/b/";
-const ourBinUrl = baseUrlBin + "63a4529fdfc68e59d56e9b8d";
-const masterKeyBin = "$2b$10$re8BCarS2TJ3.fYpy2KSd.d.Gya4h9xv/Kkmio4GmMjsYxCzTFvtu";
+const omdbAPI = {
+   baseUrl: "https://www.omdbapi.com/",
+   accessKey: "206d082e",
+   fullUrl: `${this.baseUrl}?apikey=${this.accessKey}`
+}
+
+const binAPI = {
+   baseUrl: "https://api.jsonbin.io/v3/b/",
+   binId: "63a4529fdfc68e59d56e9b8d",
+   masterKey: "$2b$10$re8BCarS2TJ3.fYpy2KSd.d.Gya4h9xv/Kkmio4GmMjsYxCzTFvtu",
+   fullUrl: `${this.baseUrl}${this.binId}`
+}
+
+// const baseUrlBin = "https://api.jsonbin.io/v3/b/";
+// const ourBinUrl = baseUrlBin + "63a4529fdfc68e59d56e9b8d";
+// const masterKeyBin = "$2b$10$re8BCarS2TJ3.fYpy2KSd.d.Gya4h9xv/Kkmio4GmMjsYxCzTFvtu";
+
+console.log(omdbApi)
+console.log(binApi)
+// binApi.masterKey
 
 console.log('hej')
 const searchTitle = document.querySelector("input[name='title']")
 const searchGenre = document.querySelector("input[name='genre']")
 const newMovieSearch = searchTitle.value
 
-fetch(movieUrl + "&t=" + `${newMovieSearch}*`)
+fetch(omdbAPI.fullUrl + "&t=" + `${newMovieSearch}*`)
      .then(
           function (response) {
                return response.json();
